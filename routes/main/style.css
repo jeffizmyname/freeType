@@ -50,6 +50,10 @@ body {
     animation: disappear 500ms forwards;
 }
 
+#text.reappear::before {
+    animation: disappear 300ms reverse forwards;
+}
+
 #cursor {
     display: block;
     position: absolute;
@@ -103,6 +107,18 @@ body {
     100% {
         opacity: 0;
         transform: translate(50%, 0);
+    }
+}
+
+@keyframes reappear {
+    0% {
+        opacity: 0;
+        transform: translate(50%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
     }
 }
 
