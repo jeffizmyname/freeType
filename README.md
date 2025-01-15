@@ -8,4 +8,5 @@ go to server folder and run server with node
 
 ## TODO
 - [ ] Styles
+- [ ] fix backSpace while multiple rows
 - [ ] idk
