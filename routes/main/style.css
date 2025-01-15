@@ -1,0 +1,130 @@
+:root {
+    --font-family: 'Space Mono', monospace;
+    --font-size: 2rem;
+    --color-background: #1c4738;
+    --color-text: #338558;
+    --color-cursor: #c43854;
+    --color-debug: #d1cb26;
+    --icon-size: 40px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    font-variant-ligatures: none;
+    font-size: var(--font-size);
+    user-select: none;
+}
+
+body {
+    background-color: var(--color-background);
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#typeBox {
+    position: relative;
+    height: 1em;
+    line-height: 1em;
+    width: 45.1ch;
+    height: 3em;
+    color: var(--color-text);
+    /* border: 1px solid red; */
+}
+
+#text::before {
+    position: absolute;
+    content: 'start typing...';
+    color: var(--color-text);
+}
+
+#text.first-key-pressed::before {
+    animation: disappear 500ms forwards;
+}
+
+#cursor {
+    display: block;
+    position: absolute;
+    height: 1em;
+    width: .05em;
+    background-color: var(--color-cursor);
+    transition: left 80ms;
+    border-radius: 5px;
+    animation: blink 1s infinite;
+}
+
+#debug {
+    color: var(--color-debug);
+    font-size: 0.5rem;
+    display: none;
+}
+
+#options {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: .2em .2em;
+    width: 100vw;
+    justify-content: end;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes disappear {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(50%, 0);
+    }
+}
+
+.material-symbols-rounded {
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+span.size-40 {
+    font-size: var(--icon-size);
+    font-variation-settings: 'FILL' 40;
+}
+
+span.settings {
+    color: var(--color-text);
+    transition: transform 500ms cubic-bezier(0, 1.48, 0.27, 1.31);
+}
+
+span.settings:hover {
+    cursor: pointer;
+    transform: rotate(180deg);
+}
