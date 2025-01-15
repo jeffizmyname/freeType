@@ -6,11 +6,12 @@ desiredLength = 45;
 typeBox = document.getElementById('text');
 cursor = document.getElementById('cursor');
 debugBox = document.getElementById('debug');
-firstKeyPress = true;
 let typingTimeout;
-
+let firstKeyPress = true;
 
 function handleEnterKey() {
+    if (charHistory[rowCounter].length === 0) return;
+
     typeBox.innerHTML += "<br>";
     if (rowCounter < 2) {
         rowCounter++;
@@ -45,9 +46,7 @@ function handleBackSpace() {
 }
 
 function handleKeyPress(e) {
-    if (charCounter >= desiredLength) {
-        moveWordToNextRow();
-    }
+    if (charCounter >= desiredLength) moveWordToNextRow();
     typeBox.innerHTML += e.key;
     charHistory[rowCounter].push(e.key);
     charCounter++;
@@ -55,6 +54,7 @@ function handleKeyPress(e) {
 }
 
 function moveWordToNextRow() {
+    if (charHistory[rowCounter].length === 0) return;
     let words = typeBox.innerHTML.split(' ');
     let lastWord = words.pop();
     typeBox.innerHTML = words.join(' ') + "<br>" + lastWord;
@@ -81,6 +81,11 @@ function handleTypingStop() {
 }
 
 document.addEventListener('keydown', (e) => {
+    if (e.key === "Tab") {
+        e.preventDefault();
+        return;
+    }
+
     if (firstKeyPress) {
         firstKeyPress = false;
         typeBox.classList.add('first-key-pressed');
@@ -93,7 +98,7 @@ document.addEventListener('keydown', (e) => {
 
     if (e.key === "Backspace") handleBackSpace();
     else if (e.key === "Enter") handleEnterKey();
-    else if (!e.ctrlKey && !e.altKey && !e.metaKey && e.key != "Tab" && e.key.length === 1) handleKeyPress(e);
+    else if (!e.ctrlKey && !e.altKey && !e.metaKey && e.key.length === 1) handleKeyPress(e);
     
     debugBox.innerHTML = `charCounter: ${charCounter} | rowCounter: ${rowCounter} | charHistory: ${charHistory}`;
 
