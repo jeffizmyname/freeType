@@ -32,12 +32,29 @@ body {
 
 #typeBox {
     position: relative;
-    height: 1em;
     line-height: 1em;
     width: 45.1ch;
-    height: 3em;
+    height: 3.5em;
     color: var(--color-text);
+    overflow: hidden;
     /* border: 1px solid red; */
+}
+
+#text {
+    position: relative;
+}
+
+#text.shift-up {
+    animation: shiftUp 80ms forwards;
+}
+
+@keyframes shiftUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-1em);
+    }
 }
 
 #text::before {

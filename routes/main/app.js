@@ -69,11 +69,17 @@ function moveWordToNextRow() {
 }
 
 function shiftTextRow() {
-    let lines = typeBox.innerHTML.split('<br>');
-    lines.shift();
-    typeBox.innerHTML = lines.join('<br>');
-    charHistory.shift();
-    charHistory.push([]);
+    typeBox.classList.add('shift-up');
+    setTimeout(() => {
+        typeBox.classList.remove('shift-up');
+        let lines = typeBox.innerHTML.split('<br>');
+        lines.shift();
+        typeBox.innerHTML = lines.join('<br>');
+        charHistory.shift();
+        charHistory.push([]);
+        cursor.style.left = `${charHistory[rowCounter].length}ch`;
+        cursor.style.top = `${rowCounter}em`;
+    }, 80);
 }
 
 function handleTypingStop() {
